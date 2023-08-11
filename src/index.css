@@ -1,0 +1,19 @@
+* {
+  box-sizing: border-box;
+  font-weight: 900;
+  margin: 0;
+}
+
+body {
+  border: 0;
+  font-family: "Inter", sans-serif;
+  background-color: #9da7a8;
+}
+
+.container {
+  min-height: 100vh;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+}

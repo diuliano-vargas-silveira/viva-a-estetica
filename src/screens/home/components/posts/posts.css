@@ -1,0 +1,36 @@
+.posts {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  padding-inline-start: 0;
+}
+
+.posts__main {
+  padding: 0 6%;
+}
+
+.post {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.post__userImage {
+  width: 44px;
+  height: 44px;
+
+  margin-bottom: 2rem;
+  border-radius: 22px;
+}
+
+.post__imageContainer {
+  margin: 0 6%;
+}
+
+.post__image {
+  width: 100%;
+  max-width: 100%;
+  border-radius: 10px;
+}
