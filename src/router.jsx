@@ -1,20 +1,25 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { Home, SignIn, SignUp } from "./screens";
+import { Home, SignIn, SignUp, GenderSelection } from "./screens";
+import { ROUTES } from "./constants/routes";
 
 export function Routes() {
   const router = createBrowserRouter([
     {
-      path: "/",
-      element: <SignIn />
+      path: ROUTES.SIGN_IN,
+      element: <SignIn />,
     },
     {
-      path: "/sign-up",
-      element: <SignUp />
+      path: ROUTES.SIGN_UP,
+      element: <SignUp />,
     },
     {
-      path: "/home",
-      element: <Home />
-    }
+      path: ROUTES.HOME,
+      element: <Home />,
+    },
+    {
+      path: ROUTES.GENDER_SELECTION,
+      element: <GenderSelection />,
+    },
   ]);
 
   return <RouterProvider router={router} />;
