@@ -8,6 +8,10 @@ app.use(express.json());
 
 const prisma = new PrismaClient();
 
+const INSUFICIENT_DATA_ERROR = "Dados incompletos.";
+const INTERNAL_SERVER_ERROR = "Ocorreu um erro no servidor";
+const NOT_AUTHORIZED_ERROR = "Email ou senha incorretos";
+
 app.listen(3000, () => {
     console.log("Server listening on port: 3000");
 });
@@ -43,14 +47,12 @@ app.post("/sign-up", async (req, res) => {
     }
 });
 
-const NOT_AUTHORIZED_ERROR = "Email ou senha incorretos";
-
 app.post("/sign-in", async (req, res) => {
     try {
         const { email, password } = req.body;
 
         if (!email || !password) {
-            return res.status(400); send(INSUFICIENT_DATA_ERROR);
+            return res.status(400).send(INSUFICIENT_DATA_ERROR);
         }
 
         const login = await prisma.user.findFirst({
@@ -99,9 +101,6 @@ app.get("/workouts/keep-shape", async (req, res) => {
 
     return res.send(workout);
 });
-
-const INSUFICIENT_DATA_ERROR = "Dados incompletos.";
-const INTERNAL_SERVER_ERROR = "Ocorreu um erro no servidor";
 
 app.post("/calculate", async (req, res) => {
     try {
