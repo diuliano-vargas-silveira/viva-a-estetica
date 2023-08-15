@@ -84,3 +84,40 @@ app.get("/workouts/keep-shape", async (req, res) => {
     return res.send(workout);
 });
 
+const INSUFICIENT_DATA_ERROR = "Dados incompletos.";
+const INTERNAL_SERVER_ERROR = "Ocorreu um erro no servidor";
+
+app.post("/calculate", async (req, res) => {
+    try {
+        const { gender, measuresSum, age } = req.body;
+
+        if (!gender || !measuresSum || !age) {
+            return res.status(400).send(INSUFICIENT_DATA_ERROR);
+        }
+
+        const MALE_CONSTANT = {
+            a: 1112,
+            b1: 0.00043499,
+            b2: 0.00000055,
+            b3: 0.00028826,
+        };
+
+        const FEMALE_CONSTANT = {
+            a: 1097,
+            b1: 0.00046971,
+            b2: 0.00000056,
+            b3: 0.00012828,
+        };
+
+        const constants = gender === "masculino" ? MALE_CONSTANT : FEMALE_CONSTANT;
+
+        const bodyDensity =
+            constants.a - constants.b1 * measuresSum + constants.b2 * Math.pow(measuresSum, 2) - constants.b3 * age;
+
+        const bodyFatPercentage = (4.95 / bodyDensity - 4.50) * 100;
+
+        return res.send({ bodyFatPercentage });
+    } catch (error) {
+        return res.status(500).send(INTERNAL_SERVER_ERROR);
+    }
+});
