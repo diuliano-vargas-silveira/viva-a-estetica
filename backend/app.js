@@ -21,36 +21,53 @@ app.get("/status", (req, res) => {
 });
 
 app.post("/sign-up", async (req, res) => {
-    const { email, password, gender } = req.body;
+    try {
+        const { email, password, gender } = req.body;
 
-    const user = await prisma.user.create({
-        data: {
-            email: email,
-            password: password,
-            gender: gender
+        if (!email || !password) {
+            return res.status(400).send(INSUFICIENT_DATA_ERROR);
         }
-    });
 
-    return res.send(user);
+        const user = await prisma.user.create({
+            data: {
+                email: email,
+                password: password,
+                gender: gender
+            }
+        });
+
+        return res.send(user);
+    }
+    catch (error) {
+        return res.status(500).send(INTERNAL_SERVER_ERROR);
+    }
 });
 
 const NOT_AUTHORIZED_ERROR = "Email ou senha incorretos";
 
 app.post("/sign-in", async (req, res) => {
-    const { email, password } = req.body;
+    try {
+        const { email, password } = req.body;
 
-    const login = await prisma.user.findFirst({
-        where: {
-            email: email,
-            password: password
+        if (!email || !password) {
+            return res.status(400); send(INSUFICIENT_DATA_ERROR);
         }
-    });
 
-    if (login === null) {
-        return res.status(400).send(NOT_AUTHORIZED_ERROR).end();
+        const login = await prisma.user.findFirst({
+            where: {
+                email: email,
+                password: password
+            }
+        });
+
+        if (login === null) {
+            return res.status(400).send(NOT_AUTHORIZED_ERROR).end();
+        }
+
+        return res.send(login);
+    } catch (error) {
+        return res.status(500).send(INTERNAL_SERVER_ERROR);
     }
-
-    return res.send(login);
 });
 
 app.get("/workouts/weight-loss", async (req, res) => {
