@@ -13,3 +13,17 @@ model User {
   password String
   gender   String?
 }
+
+model Workouts {
+  id          Int      @id @default(autoincrement())
+  category    Category
+  exercise    String
+  repetitions String
+  sets        Int
+}
+
+enum Category {
+  WEIGHT_LOSS
+  GAIN_MASS
+  KEEP_SHAPE
+}

@@ -53,3 +53,34 @@ app.post("/sign-in", async (req, res) => {
 
     return res.send(login);
 });
+
+app.get("/workouts/weight-loss", async (req, res) => {
+    const workout = await prisma.workouts.findMany({
+        where: {
+            category: "WEIGHT_LOSS"
+        }
+    });
+
+    return res.send(workout);
+});
+
+app.get("/workouts/gain-mass", async (req, res) => {
+    const workout = await prisma.workouts.findMany({
+        where: {
+            category: "GAIN_MASS"
+        }
+    });
+
+    return res.send(workout);
+});
+
+app.get("/workouts/keep-shape", async (req, res) => {
+    const workout = await prisma.workouts.findMany({
+        where: {
+            category: "KEEP_SHAPE"
+        }
+    });
+
+    return res.send(workout);
+});
+
