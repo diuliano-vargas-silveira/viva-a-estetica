@@ -4,6 +4,11 @@
   padding: 1rem;
 }
 
+.header > button {
+  background-color: transparent;
+  border: 0;
+}
+
 .header > h1 {
   color: #ffffff;
   font-size: 1.875rem;
