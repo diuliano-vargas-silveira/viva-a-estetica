@@ -23,6 +23,7 @@ const DEFAULT_FORM = {
 
 export function Poolock() {
   const [form, setForm] = useState({ ...DEFAULT_FORM });
+  const [bodyFatPercentage, setBodyFatPercentage] = useState("");
 
   function handleChange({ target: { name, value } }) {
     setForm({ ...form, [name]: value });
@@ -37,10 +38,17 @@ export function Poolock() {
       gender: localStorage.getItem("gender"), measuresSum: measureSum, age: generateRandomAge()
     };
 
-    const capixaba = await postData(ENDPOINTS.POOLOCK, data);
+    const res = await postData(ENDPOINTS.POOLOCK, data);
 
-    // TODO render data on front end
-    console.log(capixaba)
+    setBodyFatPercentage(res.bodyFatPercentage);
+  }
+
+  function renderBodyFatPercentage(bodyFatPercentage) {
+    if (bodyFatPercentage) {
+      return (
+        <div>{bodyFatPercentage}</div>
+      );
+    }
   }
 
   return (
@@ -93,6 +101,7 @@ export function Poolock() {
             <button type="submit">ENVIAR</button>
           </form>
         </div>
+        {renderBodyFatPercentage(bodyFatPercentage)}
       </main>
 
       <Footer />
