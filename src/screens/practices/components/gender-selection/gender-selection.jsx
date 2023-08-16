@@ -1,30 +1,30 @@
 import { useState } from 'react';
-
 import { useNavigate } from "react-router-dom";
 
-import { Header } from "../../components";
-import { ROUTES } from "../../constants/routes";
+import { ROUTES } from "../../../../constants/routes";
+import { SECTIONS } from '../sections';
+import { GENDERS } from '../genders';
 
-import changeGenderIcon from "../../assets/reload.png";
+import { changeGenderIcon } from '../../../../assets';
 
 import "./gender-selection.css";
 
 const MOCK = [
   {
     image: "https://cdn.discordapp.com/attachments/480450726942736406/1140287755411271790/image_6.png",
-    gender: "MASCULINO",
+    gender: GENDERS.MASCULINO,
     alt: "homem levantando halter com o braço",
     id: 1
   },
   {
     image: "https://cdn.discordapp.com/attachments/480450726942736406/1140287755704881192/image_7.png",
-    gender: "FEMININO",
+    gender: GENDERS.FEMININO,
     alt: "mulher levantando halter com o braço",
     id: 2
   }
 ]
 
-export function GenderSelection() {
+export function GenderSelection({ onChangeSection, onChangeGender }) {
   const [gender, setGender] = useState(MOCK[0]);
 
   const navigate = useNavigate();
@@ -38,8 +38,8 @@ export function GenderSelection() {
   }
 
   function handleNextStepClick() {
-    // TODO create objetives screen to navigate on click 
-    localStorage.setItem("gender", gender.gender);
+    onChangeSection(SECTIONS.PRACTICE_SELECTION)
+    onChangeGender(gender.gender)
   }
 
   function handleFeedClick() {
@@ -57,21 +57,15 @@ export function GenderSelection() {
   }
 
   return (
-    <div className="container">
-      <Header title="META E FOCO" />
+    <div className="gender-selection__main">
+      <h1>QUAL É O SEU SEXO?</h1>
 
-      <main className="gender-selection__main">
-        <h1>QUAL É O SEU SEXO?</h1>
+      {renderGenderOptions(gender)}
 
-        {renderGenderOptions(gender)}
+      <button onClick={handleNextStepClick} className="navigation__button">PRÓXIMO</button>
+      <p>OU</p>
+      <button onClick={handleFeedClick} className='navigation__button'>FEED</button>
 
-        <button onClick={handleNextStepClick} className="navigation__button">PRÓXIMO</button>
-        <p>OU</p>
-        <button onClick={handleFeedClick} className='navigation__button'>FEED</button>
-
-      </main>
-
-      <footer className="sign-in__footer" />
     </div>
   )
 }

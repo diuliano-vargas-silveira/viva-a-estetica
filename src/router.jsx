@@ -1,5 +1,5 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { Home, SignIn, SignUp, GenderSelection } from "./screens";
+import { Home, SignIn, SignUp, Practices } from "./screens";
 import { ROUTES } from "./constants/routes";
 
 export function Routes() {
@@ -17,8 +17,8 @@ export function Routes() {
       element: <Home />,
     },
     {
-      path: ROUTES.GENDER_SELECTION,
-      element: <GenderSelection />,
+      path: ROUTES.PRACTICES,
+      element: <Practices />,
     },
   ]);
 
