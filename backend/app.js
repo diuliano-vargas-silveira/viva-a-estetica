@@ -1,10 +1,12 @@
 const express = require('express');
 
+var cors = require('cors')
+
 const { PrismaClient } = require('@prisma/client');
 
 const app = express();
 
-app.use(express.json());
+app.use(express.json(), cors());
 
 const prisma = new PrismaClient();
 
@@ -12,8 +14,8 @@ const INSUFICIENT_DATA_ERROR = "Dados incompletos.";
 const INTERNAL_SERVER_ERROR = "Ocorreu um erro no servidor";
 const NOT_AUTHORIZED_ERROR = "Email ou senha incorretos";
 
-app.listen(3000, () => {
-    console.log("Server listening on port: 3000");
+app.listen(8080, () => {
+    console.log("Server listening on port: 8080");
 });
 
 app.get("/status", (req, res) => {
@@ -124,7 +126,7 @@ app.post("/calculate", async (req, res) => {
             b3: 0.00012828,
         };
 
-        const constants = gender === "masculino" ? MALE_CONSTANT : FEMALE_CONSTANT;
+        const constants = gender === "MALE" ? MALE_CONSTANT : FEMALE_CONSTANT;
 
         const bodyDensity =
             constants.a - constants.b1 * measuresSum + constants.b2 * Math.pow(measuresSum, 2) - constants.b3 * age;
