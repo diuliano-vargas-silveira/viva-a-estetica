@@ -1,0 +1,41 @@
+.poolock {
+  padding: 0 6%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.poolock > h2 {
+  margin-bottom: 3rem;
+  text-align: center;
+  color: #ffffff;
+}
+
+.poolock__table {
+  padding: 10px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  margin-bottom: 2rem;
+}
+
+.poolock__table > header {
+    margin-bottom: 10px;
+}
+
+.poolock__grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+}
+
+.poolock__grid > input[type="number"] {
+  width: 100%;
+}
+
+.poolock__grid > div {
+    padding: 10px 0;
+}
+
+.poolock__grid > div, input[type="number"] {
+  border: 1px solid #9da7a8;
+}

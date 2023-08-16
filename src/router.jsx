@@ -1,5 +1,5 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { Home, SignIn, SignUp, Practices } from "./screens";
+import { Home, SignIn, SignUp, Practices, Poolock } from "./screens";
 import { ROUTES } from "./constants/routes";
 
 export function Routes() {
@@ -19,6 +19,10 @@ export function Routes() {
     {
       path: ROUTES.PRACTICES,
       element: <Practices />,
+    },
+    {
+      path: ROUTES.POOLOCK,
+      element: <Poolock />,
     },
   ]);
 
