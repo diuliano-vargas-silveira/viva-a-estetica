@@ -35,8 +35,7 @@ export function SignUp() {
       return
     }
 
-    alert("a")
-    navigate("/")
+    navigate(ROUTES.SIGN_IN)
   }
 
   return (

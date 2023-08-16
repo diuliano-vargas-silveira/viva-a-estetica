@@ -1,0 +1,4 @@
+export const GENDERS = {
+  MASCULINO: "MASCULINO",
+  FEMININO: "FEMININO"
+};

@@ -10,6 +10,11 @@ body {
   background-color: #9da7a8;
 }
 
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
 .container {
   min-height: 100vh;
   height: 100%;

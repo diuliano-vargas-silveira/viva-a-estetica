@@ -31,8 +31,7 @@ export function SignIn() {
       return
     }
 
-    alert("a")
-    navigate("/home")
+    navigate(ROUTES.HOME)
   }
 
   return (
