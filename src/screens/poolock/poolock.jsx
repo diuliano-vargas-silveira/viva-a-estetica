@@ -1,5 +1,12 @@
-import { useState } from "react";
+import { useState } from 'react';
+
 import { Header, Footer } from "../../components";
+
+import { ENDPOINTS } from "../../constants/endpoints";
+
+import { postData } from '../../utils/axios-caseiro';
+
+import { generateRandomAge, sumObjectValues } from '../../utils/utils';
 
 import "./poolock.css";
 
@@ -21,8 +28,19 @@ export function Poolock() {
     setForm({ ...form, [name]: value });
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
+
+    const measureSum = sumObjectValues(form);
+
+    const data = {
+      gender: localStorage.getItem("gender"), measuresSum: measureSum, age: generateRandomAge()
+    };
+
+    const capixaba = await postData(ENDPOINTS.POOLOCK, data);
+
+    // TODO render data on front end
+    console.log(capixaba)
   }
 
   return (
