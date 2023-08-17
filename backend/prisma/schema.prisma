@@ -12,6 +12,7 @@ model User {
   email    String  @unique
   password String
   gender   String?
+  image    String
 }
 
 model Workouts {
@@ -26,4 +27,18 @@ enum Category {
   WEIGHT_LOSS
   GAIN_MASS
   KEEP_SHAPE
+}
+
+model Posts {
+  id        Int    @id @default(autoincrement())
+  image     String
+  userEmail String
+  userPhoto String
+}
+
+model Stories {
+  id        Int    @id @default(autoincrement())
+  image     String
+  userEmail String
+  userPhoto String
 }

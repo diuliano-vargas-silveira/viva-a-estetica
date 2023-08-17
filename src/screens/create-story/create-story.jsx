@@ -24,9 +24,13 @@ export function CreateStory() {
       return;
     }
 
-    const { email } = JSON.parse(localStorage.getItem("user"));
+    const { email, image } = JSON.parse(localStorage.getItem("user"));
 
-    const res = await postData(ENDPOINTS.STORIES, { email, image: form.image });
+    const data = {
+      imageUrl: form.image, userEmail: email, userPhoto: image
+    }
+
+    const res = await postData(ENDPOINTS.STORIES, data);
 
     if (res) {
       navigate(ROUTES.HOME);

@@ -1,0 +1,6 @@
+.user__info {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    margin: 0.5em;
+}

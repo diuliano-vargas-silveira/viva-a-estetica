@@ -19,3 +19,7 @@ Quando for executar alguma mudança nas tabelas do banco:
 deve mexer em `./backend/prisma/schema.prisma`
 
 logo após rode o comando `npx prisma db push`
+
+`cd ./backend`
+`touch .env`
+Colar a url DATABASE_URL="mysql://user:123@localhost:3306/db"
