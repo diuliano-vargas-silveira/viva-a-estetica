@@ -3,5 +3,7 @@ export const ROUTES = {
   SIGN_IN: "/",
   SIGN_UP: "/sign-up",
   PRACTICES: "/practices",
-  POOLOCK: "/poolock"
+  POOLOCK: "/poolock",
+  CREATE_POST: "/create-post",
+  CREATE_STORY: "/create-story",
 };

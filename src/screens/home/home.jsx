@@ -1,61 +1,68 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from "react";
 
 import { Footer, Header } from "../../components/";
 import { Posts } from "./components/posts/posts";
+import { fetchData } from "../../utils/axios-caseiro";
+import { ENDPOINTS } from "../../constants/endpoints";
+import { ROUTES } from "../../constants/routes";
+import { useNavigate } from "react-router-dom";
 
-const POSTS = [
-  {
-    image:
-      "https://blog.meupersonalvirtual.com.br/wp-content/uploads/2019/10/309300-leticia-favor-entregar-ate-279-malhando-certo-encontre-o-equilibrio-entre-a-amplitude-de-movimento-e-a-carga.jpg",
-    userImage:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6YFJH-SQRfmb7jim4ZdXN1UhY112yvGFRBg&usqp=CAU",
-    id: "1"
-  },
-  {
-    image:
-      "https://cte7.com.br/wp-content/uploads/2015/06/Dicas-de-roupas-para-malhar.jpg",
-    userImage:
-      "https://cte7.com.br/wp-content/uploads/2015/06/Dicas-de-roupas-para-malhar.jpg",
-    id: "2"
-  },
-  {
-    image:
-      "https://sp-ao.shortpixel.ai/client/q_glossy,ret_img,w_1024/https://blog.quisty.com.br/wp-content/uploads/2017/09/123152-moda-masculina-aprenda-a-escolher-a-melhor-roupa-para-malhar-1024x683.jpg",
-    userImage:
-      "https://sp-ao.shortpixel.ai/client/q_glossy,ret_img,w_1024/https://blog.quisty.com.br/wp-content/uploads/2017/09/123152-moda-masculina-aprenda-a-escolher-a-melhor-roupa-para-malhar-1024x683.jpg",
-    id: "3"
-  },
-  {
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6YFJH-SQRfmb7jim4ZdXN1UhY112yvGFRBg&usqp=CAU",
-    userImage:
-      "https://i.pinimg.com/736x/be/a0/fc/bea0fc0148c27dabfd338c64568e1373.jpg",
-    id: "4"
-  },
-  {
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6YFJH-SQRfmb7jim4ZdXN1UhY112yvGFRBg&usqp=CAU",
-    userImage:
-      "https://img.freepik.com/fotos-gratis/mulher-malhando-na-academia_23-2148111517.jpg?w=2000",
-    id: "5"
-  }
-]
+import "./home.css";
 
 export function Home() {
-  const [posts, setPosts] = useState([])
+  const [posts, setPosts] = useState([]);
+  const [stories, setStories] = useState([]);
+
+  const navigate = useNavigate();
+
+  function handleClickAddPost() {
+    navigate(ROUTES.CREATE_POST);
+  }
+
+  function handleClickAddStory() {
+    navigate(ROUTES.CREATE_STORY);
+  }
 
   useEffect(() => {
-    setPosts(POSTS)
-  }, [])
+    async function getPosts() {
+      const res = await fetchData(ENDPOINTS.POSTS);
+      const res2 = await fetchData(ENDPOINTS.STORIES);
 
+      if (res?.length) {
+        setPosts(res);
+      }
 
-  return <div className="container">
-    <Header title="PROGRESSO PESSOAL" />
+      if (res2?.length) {
+        setStories(res2);
+      }
+    }
 
-    <main className='posts__main'>
-      <Posts posts={posts} />
-    </main>
+    if (!posts?.length) {
+      getPosts();
+    }
+  }, [posts]);
 
-    <Footer />
-  </div >
+  return (
+    <div className="container home">
+      <Header title="PROGRESSO PESSOAL" />
+
+      <main className="posts__main">
+        <header>
+          <button onClick={handleClickAddStory}>+</button>
+          {!stories.length && <>Adicione um story</>}
+        </header>
+
+        {posts?.length ? (
+          <Posts posts={posts} />
+        ) : (
+          <h2 className="error"> Não há posts no momento</h2>
+        )}
+        <button onClick={handleClickAddPost} className="posts__add">
+          +
+        </button>
+      </main>
+
+      <Footer />
+    </div>
+  );
 }

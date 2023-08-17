@@ -9,6 +9,7 @@ export async function postData(url, data) {
         });
 
         if (!response.ok) {
+            alert("Solicitação inválida")
             throw new Error("Network response was not ok");
         }
 

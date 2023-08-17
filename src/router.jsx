@@ -1,5 +1,13 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { Home, SignIn, SignUp, Practices, Poolock } from "./screens";
+import {
+  Home,
+  SignIn,
+  SignUp,
+  Practices,
+  Poolock,
+  CreatePost,
+  CreateStory,
+} from "./screens";
 import { ROUTES } from "./constants/routes";
 
 export function Routes() {
@@ -23,6 +31,14 @@ export function Routes() {
     {
       path: ROUTES.POOLOCK,
       element: <Poolock />,
+    },
+    {
+      path: ROUTES.CREATE_POST,
+      element: <CreatePost />,
+    },
+    {
+      path: ROUTES.CREATE_STORY,
+      element: <CreateStory />,
     },
   ]);
 

@@ -10,6 +10,21 @@
   padding: 0 6%;
 }
 
+.posts__add {
+  position: absolute;
+  z-index: 1;
+  right: 10px;
+  bottom: 100px;
+
+  height: 60px;
+  width: 60px;
+  border-radius: 30px;
+  border: 0;
+  cursor: pointer;
+  font-size: 2rem;
+  text-align: center;
+}
+
 .post {
   display: flex;
   flex-direction: column;

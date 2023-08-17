@@ -12,7 +12,7 @@
   padding-top: 3rem;
 }
 
-.sign-in > form > input {
+form > input {
   width: 100%;
   padding: 0.75rem 2rem;
   margin-bottom: 3rem;
@@ -24,7 +24,7 @@
   border: 0;
 }
 
-.sign-in > form > input:focus-visible {
+form > input:focus-visible {
   outline: none;
 }
 
