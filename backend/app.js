@@ -28,9 +28,9 @@ app.get("/status", (req, res) => {
 
 app.post("/sign-up", async (req, res) => {
     try {
-        const { email, password, gender } = req.body;
+        const { email, password, gender, image } = req.body;
 
-        if (!email || !password) {
+        if (!email || !password || !image) {
             return res.status(400).send(INSUFICIENT_DATA_ERROR);
         }
 
@@ -38,7 +38,8 @@ app.post("/sign-up", async (req, res) => {
             data: {
                 email: email,
                 password: password,
-                gender: gender
+                gender: gender,
+                image: image
             }
         });
 

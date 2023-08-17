@@ -8,10 +8,13 @@ import { ROUTES } from "../../constants/routes";
 import { useNavigate } from "react-router-dom";
 
 import "./home.css";
+import { Storie, StorieModal } from "./components/storie/storie";
 
 export function Home() {
   const [posts, setPosts] = useState([]);
   const [stories, setStories] = useState([]);
+  const [openStorie, setOpenStorie] = useState(false);
+  const [selectedStorie, setSelectedStorie] = useState("");
 
   const navigate = useNavigate();
 
@@ -42,6 +45,15 @@ export function Home() {
     }
   }, [posts]);
 
+  function handleStorieClick(storieImage) {
+    setOpenStorie(true);
+    setSelectedStorie(storieImage);
+  }
+
+  function handleStorieCloseClick() {
+    setOpenStorie(false);
+  }
+
   return (
     <div className="container home">
       <Header title="PROGRESSO PESSOAL" />
@@ -50,7 +62,12 @@ export function Home() {
         <header>
           <button onClick={handleClickAddStory}>+</button>
           {!stories.length && <>Adicione um story</>}
+          <div className="flex gap">
+            {stories.map((storie, index) => <Storie {...storie} key={index} onClick={() => handleStorieClick(storie.image)} />)}
+          </div>
         </header>
+
+        {openStorie && <StorieModal selectedStorie={selectedStorie} onClick={handleStorieCloseClick} />}
 
         {posts?.length ? (
           <Posts posts={posts} />

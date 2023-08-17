@@ -7,9 +7,10 @@ import { ROUTES } from "../../constants/routes";
 
 import { isValidForm } from "../../utils";
 
-import "./sign-in.css";
 import { postData } from "../../utils/axios-caseiro";
 import { ENDPOINTS } from "../../constants/endpoints";
+
+import "./sign-in.css";
 
 const DEFAULT_FORM = {
   email: "",
