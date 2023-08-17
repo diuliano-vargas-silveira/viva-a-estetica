@@ -34,3 +34,10 @@ model Posts {
   userEmail String
   userPhoto String
 }
+
+model Stories {
+  id        Int    @id @default(autoincrement())
+  image     String
+  userEmail String
+  userPhoto String
+}

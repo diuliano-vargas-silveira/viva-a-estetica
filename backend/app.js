@@ -170,3 +170,35 @@ app.get("/posts", async (req, res) => {
         return req.status(500).send(INTERNAL_SERVER_ERROR);
     }
 });
+
+app.post("/stories", async (req, res) => {
+    try {
+        const { imageUrl, userEmail, userPhoto } = req.body;
+
+        if (!imageUrl || !userEmail || !userPhoto) {
+            return res.status(400).send(INSUFICIENT_DATA_ERROR);
+        }
+
+        const storie = await prisma.stories.create({
+            data: {
+                image: imageUrl,
+                userEmail: userEmail,
+                userPhoto: userPhoto
+            }
+        });
+
+        return res.send(storie);
+    } catch (error) {
+        return res.status(500).send(INTERNAL_SERVER_ERROR);
+    }
+});
+
+app.get("/stories", async (req, res) => {
+    try {
+        const stories = await prisma.stories.findMany();
+
+        return res.send(stories);
+    } catch (error) {
+        return req.status(500).send(INTERNAL_SERVER_ERROR);
+    }
+});
