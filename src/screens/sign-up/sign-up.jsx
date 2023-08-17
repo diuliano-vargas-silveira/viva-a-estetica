@@ -5,11 +5,14 @@ import { Header } from "../../components/header/header";
 import { ROUTES } from "../../constants/routes";
 
 import { isValidForm } from "../../utils";
+import { postData } from "../../utils/axios-caseiro";
+import { ENDPOINTS } from "../../constants/endpoints";
 
 const DEFAULT_FORM = {
   email: "",
+  image: "",
   password: "",
-  c_password: ""
+  c_password: "",
 };
 
 export function SignUp() {
@@ -17,25 +20,34 @@ export function SignUp() {
 
   const navigate = useNavigate();
 
-
   function handleChange({ target: { name, value } }) {
-    setForm({ ...form, [name]: value })
+    setForm({ ...form, [name]: value });
   }
 
-  function handleSubmit(e) {
-    e.preventDefault()
+  async function handleSubmit(e) {
+    e.preventDefault();
 
     if (!isValidForm(form)) {
-      alert("Formulário incompleto! Verifique os campos")
-      return
+      alert("Formulário incompleto! Verifique os campos");
+      return;
     }
 
     if (form.password !== form.c_password) {
-      alert("As senhas devem coincidir!")
-      return
+      alert("As senhas devem coincidir!");
+      return;
     }
 
-    navigate(ROUTES.SIGN_IN)
+    const res = await postData(ENDPOINTS.SIGN_UP, {
+      email: form.email,
+      password: form.password,
+      image: form.image,
+      gender: "",
+    });
+
+    if (res) {
+      alert("Usuário criado!");
+      navigate(ROUTES.SIGN_IN);
+    }
   }
 
   return (
@@ -48,6 +60,13 @@ export function SignUp() {
             type="email"
             name="email"
             placeholder="EMAIL"
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="text"
+            name="image"
+            placeholder="IMAGEM"
             onChange={handleChange}
             required
           />
@@ -67,7 +86,7 @@ export function SignUp() {
             required
           />
 
-          <Link to={ROUTES.SIGN_UP} className="sign-in__link">
+          <Link to={ROUTES.SIGN_IN} className="sign-in__link">
             Já tenho conta
           </Link>
 
@@ -77,5 +96,5 @@ export function SignUp() {
 
       <footer className="sign-in__footer" />
     </div>
-  )
+  );
 }

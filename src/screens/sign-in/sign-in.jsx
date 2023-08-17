@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState } from "react";
 
 import { Link, useNavigate } from "react-router-dom";
 
@@ -8,6 +8,8 @@ import { ROUTES } from "../../constants/routes";
 import { isValidForm } from "../../utils";
 
 import "./sign-in.css";
+import { postData } from "../../utils/axios-caseiro";
+import { ENDPOINTS } from "../../constants/endpoints";
 
 const DEFAULT_FORM = {
   email: "",
@@ -20,18 +22,26 @@ export function SignIn() {
   const navigate = useNavigate();
 
   function handleChange({ target: { name, value } }) {
-    setForm({ ...form, [name]: value })
+    setForm({ ...form, [name]: value });
   }
 
-  function handleSubmit(e) {
-    e.preventDefault()
+  async function handleSubmit(e) {
+    e.preventDefault();
 
     if (!isValidForm(form)) {
-      alert("Formulário incompleto! Verifique os campos")
-      return
+      alert("Formulário incompleto! Verifique os campos");
+      return;
     }
 
-    navigate(ROUTES.HOME)
+    const res = await postData(ENDPOINTS.SIGN_IN, {
+      email: form.email,
+      password: form.password,
+    });
+
+    if (res) {
+      localStorage.setItem("user", JSON.stringify(res));
+      navigate(ROUTES.HOME);
+    }
   }
 
   return (
@@ -40,7 +50,13 @@ export function SignIn() {
 
       <main className="sign-in">
         <form id="form" className="form" onSubmit={handleSubmit}>
-          <input type="email" name="email" placeholder="EMAIL" onChange={handleChange} required />
+          <input
+            type="email"
+            name="email"
+            placeholder="EMAIL"
+            onChange={handleChange}
+            required
+          />
           <input
             type="password"
             name="password"
