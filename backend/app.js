@@ -138,3 +138,35 @@ app.post("/calculate", async (req, res) => {
         return res.status(500).send(INTERNAL_SERVER_ERROR);
     }
 });
+
+app.post("/posts", async (req, res) => {
+    try {
+        const { imageUrl, userEmail, userPhoto } = req.body;
+
+        if (!imageUrl || !userEmail || !userPhoto) {
+            return res.status(400).send(INSUFICIENT_DATA_ERROR);
+        }
+
+        const post = await prisma.posts.create({
+            data: {
+                image: imageUrl,
+                userEmail: userEmail,
+                userPhoto: userPhoto
+            }
+        });
+
+        return res.send(post);
+    } catch (error) {
+        return res.status(500).send(INTERNAL_SERVER_ERROR);
+    }
+});
+
+app.get("/posts", async (req, res) => {
+    try {
+        const posts = await prisma.posts.findMany();
+
+        return res.send(posts);
+    } catch (error) {
+        return req.status(500).send(INTERNAL_SERVER_ERROR);
+    }
+});
