@@ -34,6 +34,7 @@ export function Practices() {
 
   function handleChangeGender(gender) {
     setGender(gender);
+    localStorage.setItem("gender", gender);
   }
 
   function handleChangeSection(section) {
