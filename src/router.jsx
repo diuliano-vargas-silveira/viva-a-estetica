@@ -6,6 +6,7 @@ import {
   Practices,
   Poolock,
   CreatePost,
+  CreateStory,
 } from "./screens";
 import { ROUTES } from "./constants/routes";
 
@@ -34,6 +35,10 @@ export function Routes() {
     {
       path: ROUTES.CREATE_POST,
       element: <CreatePost />,
+    },
+    {
+      path: ROUTES.CREATE_STORY,
+      element: <CreateStory />,
     },
   ]);
 

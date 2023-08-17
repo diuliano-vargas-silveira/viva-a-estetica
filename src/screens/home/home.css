@@ -1,0 +1,29 @@
+.home {
+  justify-content: start;
+  margin-bottom: auto;
+  display: block;
+}
+
+.posts__main {
+  min-height: calc(100vh - 216px);
+}
+
+.posts__main > header {
+  display: flex;
+  padding: 0.5rem;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.posts__main > header button {
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+  border: 0;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.error {
+  margin-top: 60%;
+}

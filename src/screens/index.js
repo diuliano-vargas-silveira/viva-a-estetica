@@ -4,3 +4,4 @@ export * from "./home/home";
 export * from "./practices/practices";
 export * from "./poolock/poolock";
 export * from "./create-post/create";
+export * from "./create-story/create-story";

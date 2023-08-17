@@ -5,4 +5,5 @@ export const ROUTES = {
   PRACTICES: "/practices",
   POOLOCK: "/poolock",
   CREATE_POST: "/create-post",
+  CREATE_STORY: "/create-story",
 };
